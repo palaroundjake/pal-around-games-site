@@ -797,16 +797,10 @@ body.is-scrolling .feature-row.is-visible .icon-alarm {
   gap: 8px;
 }
 
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+.footer-brand img {
+  height: 40px;
+  width: auto;
 }
-
-.footer-tagline { margin: 0; font-size: 14px; }
 
 .footer-social {
   display: flex;
