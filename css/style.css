@@ -661,15 +661,6 @@ body.is-scrolling .feature-row.is-visible .icon-alarm {
   margin: 0;
 }
 
-.rulebook-copy p a {
-  color: #3345a6;
-  text-decoration: underline;
-  font-weight: 700;
-}
-.rulebook-copy p a:hover {
-  color: var(--color-blue-dark, #3345a6);
-}
-
 .rulebook-product a {
   display: block;
   transition: transform 0.15s ease;
