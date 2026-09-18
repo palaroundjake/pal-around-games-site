@@ -821,6 +821,15 @@ body.is-scrolling .feature-row.is-visible .icon-alarm {
   color: var(--color-text-muted);
 }
 
+/* ===== Anchor targets ===== */
+/* Keeps the fixed header from covering a section's own top padding when
+   jumping to it via an in-page link (e.g. #notify, #about, #contact) —
+   without this, the header eats into the section and lands right on its
+   first child (the card/box) instead of the section's top. */
+main section[id] {
+  scroll-margin-top: 73px;
+}
+
 /* ===== Scroll reveal ===== */
 .reveal {
   opacity: 0;
