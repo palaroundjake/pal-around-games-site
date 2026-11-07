@@ -270,7 +270,7 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: 0.02em;
-  font-size: clamp(20px, 2.4vw, 32px);
+  font-size: clamp(26px, 3.6vw, 46px);
   line-height: 1.3;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
   margin: 0;
@@ -1016,4 +1016,9 @@ main section[id] {
 
   .outfit-section .split-copy { order: 2; }
   .outfit-section .split-media { order: 1; }
+}
+
+/* Very small phones: keep the longest hero slide on one line */
+@media (max-width: 359px) {
+  .hero-overlay-text { font-size: 22px; }
 }
