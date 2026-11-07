@@ -18,6 +18,94 @@ window.addEventListener('scroll', () => {
   }, 150);
 }, { passive: true });
 
+// Hero carousel — rotates every 3s. Pauses while a mouse hovers it or a
+// keyboard user is focused in it, while it's offscreen or the tab is hidden,
+// and never auto-starts for visitors who prefer reduced motion. The pause
+// button and dots give everyone manual control.
+(() => {
+  const hero = document.querySelector('.hero-banner');
+  if (!hero) return;
+
+  const slides = [...hero.querySelectorAll('.hero-slide')];
+  const texts = [...hero.querySelectorAll('.hero-overlay-text')];
+  const dots = [...hero.querySelectorAll('.hero-dot')];
+  const toggle = hero.querySelector('.hero-toggle');
+  const live = hero.querySelector('#heroLive');
+  const INTERVAL = 3000;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let current = 0;
+  let timer;
+  const hold = { user: reduceMotion.matches, pointer: false, focus: false, offscreen: false };
+  const isRunning = () =>
+    !hold.user && !hold.pointer && !hold.focus && !hold.offscreen && !document.hidden;
+
+  function schedule() {
+    clearTimeout(timer);
+    if (isRunning()) timer = setTimeout(() => show(current + 1), INTERVAL);
+  }
+
+  function show(index, announce = false) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === current);
+      slide.setAttribute('aria-hidden', String(i !== current));
+    });
+    texts.forEach((text, i) => {
+      text.classList.toggle('is-active', i === current);
+      text.setAttribute('aria-hidden', String(i !== current));
+    });
+    dots.forEach((dot, i) => {
+      if (i === current) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+    // Only announce slide text when the visitor chose the slide themselves.
+    if (announce) live.textContent = texts[current].textContent;
+    schedule();
+  }
+
+  function syncToggle() {
+    toggle.dataset.state = hold.user ? 'paused' : 'playing';
+    toggle.setAttribute('aria-label', hold.user ? 'Play slideshow' : 'Pause slideshow');
+  }
+
+  dots.forEach((dot, i) => dot.addEventListener('click', () => show(i, true)));
+
+  toggle.addEventListener('click', () => {
+    hold.user = !hold.user;
+    syncToggle();
+    schedule();
+  });
+
+  hero.addEventListener('pointerenter', (e) => {
+    if (e.pointerType === 'mouse') { hold.pointer = true; schedule(); }
+  });
+  hero.addEventListener('pointerleave', (e) => {
+    if (e.pointerType === 'mouse') { hold.pointer = false; schedule(); }
+  });
+
+  hero.addEventListener('focusin', (e) => {
+    if (e.target.matches(':focus-visible')) { hold.focus = true; schedule(); }
+  });
+  hero.addEventListener('focusout', (e) => {
+    if (!hero.contains(e.relatedTarget)) { hold.focus = false; schedule(); }
+  });
+
+  new IntersectionObserver(([entry]) => {
+    hold.offscreen = !entry.isIntersecting;
+    schedule();
+  }, { threshold: 0.25 }).observe(hero);
+
+  document.addEventListener('visibilitychange', schedule);
+
+  reduceMotion.addEventListener('change', (e) => {
+    if (e.matches) { hold.user = true; syncToggle(); schedule(); }
+  });
+
+  syncToggle();
+  schedule();
+})();
+
 // Nav dropdown menu
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
