@@ -15,8 +15,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png" />
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="/assets/images/hero/hero-1.jpg" media="(min-width: 601px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="/assets/images/hero/hero-1-mobile.jpg" media="(max-width: 600px)" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -45,65 +43,14 @@
 
   <main>
     <!-- ===== HERO ===== -->
-    <section class="hero-banner" aria-roledescription="carousel" aria-label="Get Up photos">
-      <div class="hero-slides">
-        <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 5" style="--focus: center 55%;">
-          <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/hero/hero-1-mobile.jpg" width="1200" height="1500" />
-            <img src="/assets/images/hero/hero-1.jpg" width="2400" height="1350" fetchpriority="high" alt="The Get Up game box beside a row of sloth character cards dressed in colorful outfits" />
-          </picture>
-        </div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true" style="--focus: center 55%;">
-          <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/hero/hero-2-mobile.jpg" width="1200" height="1500" />
-            <img src="/assets/images/hero/hero-2.jpg" width="2400" height="1350" loading="lazy" alt="Four friends laughing and reaching for cards at the same time during a game of Get Up" />
-          </picture>
-        </div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true" style="--focus: center 15%;">
-          <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/hero/hero-3-mobile.jpg" width="1200" height="1500" />
-            <img src="/assets/images/hero/hero-3.jpg" width="2400" height="1350" loading="lazy" alt="The Get Up box on a table behind blurred hands grabbing cards" />
-          </picture>
-        </div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true" style="--focus: center 10%;">
-          <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/hero/hero-4-mobile.jpg" width="1200" height="1500" />
-            <img src="/assets/images/hero/hero-4.jpg" width="2400" height="1350" loading="lazy" alt="A player holding out a hand as a card flies across the table" />
-          </picture>
-        </div>
-        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true" style="--focus: center 50%;">
-          <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/hero/hero-5-mobile.jpg" width="1200" height="1500" />
-            <img src="/assets/images/hero/hero-5.jpg" width="2400" height="1350" loading="lazy" alt="Overhead view of four players' sloth cards around a messy pile of face-down clothing cards" />
-          </picture>
-        </div>
-      </div>
-
+    <section class="hero-banner">
+      <img src="/assets/images/getup-3dbox-boxandcards-Camera-2.png" width="1920" height="1080" alt="The Get Up game box and cards, featuring illustrated sloth characters getting dressed" />
       <div class="hero-banner-overlay">
         <div class="container hero-overlay-inner">
-          <div class="hero-overlay-texts">
-            <p class="hero-overlay-text is-active">Race to dress sloths</p>
-            <p class="hero-overlay-text" aria-hidden="true">No turns.</p>
-            <p class="hero-overlay-text" aria-hidden="true">Fast, fun frenzy!</p>
-            <p class="hero-overlay-text" aria-hidden="true">Tough choices.</p>
-            <p class="hero-overlay-text" aria-hidden="true">Easy to play over and over.</p>
-          </div>
+          <p class="hero-overlay-text">Race to dress sloths too lazy to dress themselves!</p>
           <a href="#notify" class="btn btn-primary">Notify Me When It's Live</a>
         </div>
       </div>
-
-      <div class="hero-controls">
-        <button type="button" class="hero-toggle" data-state="playing" aria-label="Pause slideshow">
-          <svg class="icon-pause" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><rect x="2" y="1" width="3" height="10" rx="0.5"/><rect x="7" y="1" width="3" height="10" rx="0.5"/></svg>
-          <svg class="icon-play" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 1.2v9.6L10.8 6z"/></svg>
-        </button>
-        <button type="button" class="hero-dot" aria-label="Go to slide 1" aria-current="true"></button>
-        <button type="button" class="hero-dot" aria-label="Go to slide 2"></button>
-        <button type="button" class="hero-dot" aria-label="Go to slide 3"></button>
-        <button type="button" class="hero-dot" aria-label="Go to slide 4"></button>
-        <button type="button" class="hero-dot" aria-label="Go to slide 5"></button>
-      </div>
-      <span class="sr-only" id="heroLive" aria-live="polite"></span>
     </section>
 
     <section class="hero-content">
