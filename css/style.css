@@ -191,18 +191,19 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
 
 /* ===== Hero trailer (poster + player framed on the page background) ===== */
 .hero-banner {
-  /* header height + the 40px border */
-  padding: calc(var(--header-h) + 40px) 40px 0;
+  /* header height + the 40px border above the video */
+  padding: calc(var(--header-h) + 40px) 0 0;
   background-color: var(--color-bg);
   background-image: url('../assets/images/zigzag-pattern.svg');
   background-repeat: repeat;
   background-size: 28px 28px;
 }
 
+/* Same width and side margins as the intro text and cards below (.hero-inner). */
+.hero-banner-inner { max-width: 780px; }
+
 .hero-frame {
   position: relative;
-  max-width: 1040px;
-  margin: 0 auto;
   aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
@@ -852,7 +853,7 @@ main section[id] {
 
 /* ===== Responsive ===== */
 @media (max-width: 860px) {
-  .hero-banner { padding: calc(var(--header-h) + 20px) 20px 0; }
+  .hero-banner { padding: calc(var(--header-h) + 20px) 0 0; }
   .hero-content { padding: 24px 0 32px; }
   .hero-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
   .hero-copy { display: contents; text-align: center; }
@@ -894,6 +895,7 @@ main section[id] {
 @media (min-width: 861px) {
   /* Box on the left with the quick-facts cards right under it; logo, intro
      and the Notify button fill the right column. */
+  .hero-banner-inner { max-width: 960px; }
   .hero-inner {
     max-width: 960px;
     grid-template-columns: 360px 1fr;
