@@ -339,7 +339,8 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
 
 /* ===== Quick facts ===== */
 .facts-section {
-  margin-top: 0;
+  grid-column: 1 / -1;
+  order: 3;
 }
 
 .feature-row {
@@ -857,14 +858,14 @@ main section[id] {
 @media (max-width: 860px) {
   .hero-banner { padding: 93px 20px 0; }
   .hero-content { padding: 24px 0 32px; }
-  .facts-section { margin-top: 32px; }
   .hero-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
   .hero-copy { display: contents; text-align: center; }
   .hero-logo { order: 1; margin: 0; }
   .hero-logo img { margin: 0 auto; }
   .hero-product { order: 2; max-width: 170px; margin: 0 auto; }
-  .hero-tagline { order: 3; margin: 0 auto; }
-  .hero-cta { order: 4; }
+  .facts-section { order: 3; }
+  .hero-tagline { order: 4; margin: 0 auto; }
+  .hero-cta { order: 5; }
   .hero-cta .btn { width: 100%; max-width: 320px; }
   .about-inner { grid-template-columns: 1fr; }
   .about-media { max-width: 240px; margin: 0 auto; }
