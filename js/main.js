@@ -38,31 +38,6 @@ window.addEventListener('scroll', () => {
   frame.addEventListener('click', play);
 })();
 
-// Nav dropdown menu
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-
-const closeNav = () => {
-  navLinks.classList.remove('is-open');
-  navToggle.setAttribute('aria-expanded', 'false');
-};
-
-navToggle.addEventListener('click', (event) => {
-  event.stopPropagation();
-  const isOpen = navLinks.classList.toggle('is-open');
-  navToggle.setAttribute('aria-expanded', String(isOpen));
-});
-
-document.addEventListener('click', (event) => {
-  if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
-    closeNav();
-  }
-});
-
-navLinks.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', closeNav);
-});
-
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 

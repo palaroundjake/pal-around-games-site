@@ -145,62 +145,49 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
   margin: -9.5px 0 -9.5px -13px;
 }
 
-.nav-toggle {
+.nav-links {
   justify-self: end;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-.nav-toggle span {
-  display: block;
-  height: 2px;
-  background: var(--color-cream);
-  border-radius: 2px;
-  transition: background 0.2s ease;
-}
-.site-header.is-solid .nav-toggle span { background: var(--color-text); }
-
-.nav-links {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 2px;
-  min-width: 190px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(34, 32, 27, 0.15);
-  padding: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-}
-.nav-links.is-open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+  align-items: center;
+  gap: 4px;
 }
 
 .nav-links a {
   color: var(--color-text);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   padding: 10px 14px;
-  border-radius: 10px;
-  transition: background 0.15s ease;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 .nav-links a:hover { background: var(--color-bg-alt); }
+
+/* "Sign Up" is the call to action, so it gets the button treatment. */
+.nav-links a.nav-cta {
+  background: var(--color-blue-light);
+  color: var(--color-blue-dark);
+  margin-left: 6px;
+}
+.nav-links a.nav-cta:hover {
+  background: var(--color-blue);
+  color: var(--color-cream);
+}
+
+@media (max-width: 480px) {
+  .nav-inner { column-gap: 8px; }
+  .nav-links { gap: 0; }
+  .nav-links a { font-size: 14px; padding: 8px 6px; }
+  .nav-links a.nav-cta { margin-left: 4px; padding: 8px 11px; }
+}
+
+/* Very small phones: shrink the logo a touch so all three links still fit. */
+@media (max-width: 360px) {
+  :root { --header-h: 71px; }
+  .brand img { width: 112px; height: 56px; margin: -7px 0 -7px -10px; }
+  .nav-links a { font-size: 13px; padding: 6px 4px; }
+  .nav-links a.nav-cta { padding: 6px 9px; }
+}
 
 /* ===== Hero trailer (poster + player framed on the page background) ===== */
 .hero-banner {
