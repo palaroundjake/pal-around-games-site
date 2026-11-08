@@ -1,5 +1,6 @@
 /* ===== Design tokens ===== */
 :root {
+  --header-h: 81px; /* 52px logo + 2 x 14px padding + 1px border */
   --color-bg: #FAF7F1;
   --color-bg-rgb: 250, 247, 241;
   --color-bg-alt: #F1ECE2;
@@ -131,6 +132,11 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
   display: flex;
   align-items: center;
 }
+.brand img {
+  display: block;
+  height: 52px;
+  width: auto;
+}
 
 .nav-toggle {
   justify-self: end;
@@ -191,8 +197,8 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
 
 /* ===== Hero trailer (poster + player framed on the page background) ===== */
 .hero-banner {
-  /* header height (73px) + the 40px border */
-  padding: 113px 40px 0;
+  /* header height + the 40px border */
+  padding: calc(var(--header-h) + 40px) 40px 0;
   background-color: var(--color-bg);
   background-image: url('../assets/images/zigzag-pattern.svg');
   background-repeat: repeat;
@@ -836,7 +842,7 @@ body.is-scrolling .feature-row.is-visible .icon-alarm {
    without this, the header eats into the section and lands right on its
    first child (the card/box) instead of the section's top. */
 main section[id] {
-  scroll-margin-top: 73px;
+  scroll-margin-top: var(--header-h);
 }
 
 /* ===== Scroll reveal ===== */
@@ -852,7 +858,7 @@ main section[id] {
 
 /* ===== Responsive ===== */
 @media (max-width: 860px) {
-  .hero-banner { padding: 93px 20px 0; }
+  .hero-banner { padding: calc(var(--header-h) + 20px) 20px 0; }
   .hero-content { padding: 24px 0 32px; }
   .hero-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
   .hero-copy { display: contents; text-align: center; }
