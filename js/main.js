@@ -38,6 +38,65 @@ window.addEventListener('scroll', () => {
   frame.addEventListener('click', play);
 })();
 
+// Photo gallery — looping carousel. Each slide is positioned by its offset from
+// the current photo (--o: 0 = main, +/-1 = peeking neighbors, +/-2 = parked
+// offscreen), so it wraps around forever with a neighbor on both sides.
+(() => {
+  const stage = document.getElementById('galleryStage');
+  if (!stage) return;
+
+  const slides = [...stage.querySelectorAll('.gallery-slide')];
+  const n = slides.length;
+  let current = 0;
+
+  function render() {
+    slides.forEach((slide, i) => {
+      let o = (((i - current) % n) + n) % n;
+      if (o > n / 2) o -= n;
+      slide.style.setProperty('--o', Math.abs(o) > 1 ? Math.sign(o) * 2 : o);
+      slide.classList.toggle('is-active', o === 0);
+      slide.classList.toggle('is-near', Math.abs(o) === 1);
+      slide.setAttribute('aria-hidden', String(o !== 0));
+      // Start loading photos just before they slide into view.
+      if (Math.abs(o) <= 2) slide.querySelector('img').loading = 'eager';
+    });
+  }
+
+  const go = (delta) => { current = (current + delta + n) % n; render(); };
+
+  stage.querySelector('.gallery-prev').addEventListener('click', () => go(-1));
+  stage.querySelector('.gallery-next').addEventListener('click', () => go(1));
+
+  // Clicking a peeking photo brings it to the middle.
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => {
+      if (slide.classList.contains('is-near')) {
+        const o = (((i - current) % n) + n) % n;
+        go(o > n / 2 ? -1 : 1);
+      }
+    });
+  });
+
+  // Swipe on touch screens / drag with a mouse.
+  let startX = null;
+  stage.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+  stage.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+  });
+  stage.addEventListener('pointercancel', () => { startX = null; });
+
+  // Left/right arrow keys while focus is inside the gallery.
+  stage.closest('section').addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'ArrowRight') go(1);
+  });
+
+  render();
+})();
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
