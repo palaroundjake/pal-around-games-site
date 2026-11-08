@@ -132,10 +132,17 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
   display: flex;
   align-items: center;
 }
+/* The logo file has transparent padding around the artwork (the artwork is
+   ~73% of the image height and starts ~9% in from the left). Size the image so
+   the visible logo is ~52px tall, then pull the padding back with negative
+   margins so the header stays 81px tall and the circle lines up with the page gutter. */
 .brand img {
   display: block;
-  height: 52px;
-  width: auto;
+  width: 142px;
+  height: 71px;
+  max-width: none;
+  flex: none;
+  margin: -9.5px 0 -9.5px -13px;
 }
 
 .nav-toggle {
