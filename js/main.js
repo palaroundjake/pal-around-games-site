@@ -1,13 +1,6 @@
-// Header gains a solid background once scrolled past the hero banner
-const siteHeader = document.querySelector('.site-header');
-const setHeaderSolid = () => {
-  siteHeader.classList.toggle(
-    'is-solid',
-    window.scrollY > 40 || document.body.classList.contains('hero-playing')
-  );
-};
-setHeaderSolid();
-window.addEventListener('scroll', setHeaderSolid, { passive: true });
+// The page opens on the cream background (framed trailer), so the header is
+// always solid rather than transparent over a photo.
+document.querySelector('.site-header').classList.add('is-solid');
 
 // Marks <body> as "scrolling" for the duration of active scroll input, so
 // scroll-only effects (like the alarm clock icon rocking) pause once the
@@ -25,10 +18,11 @@ window.addEventListener('scroll', () => {
 // youtube-nocookie domain) is only created once the visitor presses play.
 (() => {
   const hero = document.getElementById('heroVideo');
-  if (!hero) return;
+  const frame = hero && hero.querySelector('.hero-frame');
+  if (!frame) return;
 
   function play() {
-    if (hero.classList.contains('is-playing')) return;
+    if (frame.classList.contains('is-playing')) return;
     const iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' +
       encodeURIComponent(hero.dataset.videoId) + '?autoplay=1&rel=0&playsinline=1';
@@ -36,17 +30,12 @@ window.addEventListener('scroll', () => {
     iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    hero.appendChild(iframe);
-    hero.classList.add('is-playing');
-    document.body.classList.add('hero-playing');
-    setHeaderSolid();
+    frame.appendChild(iframe);
+    frame.classList.add('is-playing');
     iframe.focus();
   }
 
-  hero.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return; // let "Notify Me" jump to the signup
-    play();
-  });
+  frame.addEventListener('click', play);
 })();
 
 // Nav dropdown menu
