@@ -239,7 +239,7 @@ p { margin: 0 0 16px; color: var(--color-text-muted); }
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
-.hero-play svg { width: 40px; height: 40px; margin-left: 4px; }
+.hero-play svg { width: 40px; height: 40px; display: block; }
 .hero-play:hover { transform: translate(-50%, -50%) scale(1.08); background: #fff; }
 .hero-play:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 
